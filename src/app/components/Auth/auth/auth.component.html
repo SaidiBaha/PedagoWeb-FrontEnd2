@@ -1,0 +1,40 @@
+<!-- auth.component.html -->
+
+<div>
+    <h2>Register</h2>
+    <form (ngSubmit)="register()">
+      <div>
+        <label>First Name:</label>
+        <input type="text" [(ngModel)]="registerRequest.firstname" name="firstname" required>
+      </div>
+      <div>
+        <label>Last Name:</label>
+        <input type="text" [(ngModel)]="registerRequest.lastname" name="lastname" required>
+      </div>
+      <div>
+        <label>Email:</label>
+        <input type="email" [(ngModel)]="registerRequest.email" name="email" required>
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" [(ngModel)]="registerRequest.password" name="password" required>
+      </div>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+  
+  <div>
+    <h2>Authenticate</h2>
+    <form (ngSubmit)="authenticate()">
+      <div>
+        <label>Email:</label>
+        <input type="email" [(ngModel)]="authenticationRequest.email" name="email" required>
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" [(ngModel)]="authenticationRequest.password" name="password" required>
+      </div>
+      <button type="submit">Authenticate</button>
+    </form>
+  </div>
+  

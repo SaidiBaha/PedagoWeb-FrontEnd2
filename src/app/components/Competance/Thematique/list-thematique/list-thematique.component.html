@@ -1,0 +1,95 @@
+<table class="display expandable-table" style="width:100%">
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>Action </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let th of listThematique">
+      
+      <td>
+      
+
+        <div  id="accordion" >
+
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="showCompetences(th)">
+                  {{ th.nom }}
+                </button>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <div *ngIf="selectedThematique">
+                  <ul>
+                    <li *ngFor="let competence of competencesForSelectedThematique">
+                      {{ competence.nom }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-danger" (click)="deleteUser(th.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Show the list of competences for the selected thematique -->
+
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <form novalidate>
+          <div class="row">
+              <div class="col-md-12 grid-margin">
+                  <div class="card rounded">
+                      <div class="card-header">
+                          <h4 class="card-title">ADD User</h4>
+                      </div>
+                      <div class="card-body">
+                       
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control form-control-sm w-75 mx-auto" name="nom"
+                                [(ngModel)]="thematique.nom" placeholder="nom" required #titleInput>
+                        </div>
+                        
+            
+      
+                          <div class="form-group text-center"> 
+                            <!-- aria-label="Close"  data-dismiss="modal" (click)="closeModal(); -->
+                              <!-- <button type="submit" class="btn btn-danger" aria-label="Close"  data-dismiss="modal" (click)="closeModal();  (click)="UpdateOffer()" >Update</button> -->
+                              <button type="submit" class="btn btn-danger" aria-label="Close"  data-dismiss="modal" (click)="closeModal();  createThematique()">Submit</button>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

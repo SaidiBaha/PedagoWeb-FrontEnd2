@@ -1,0 +1,191 @@
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body d-flex align-items-center">
+            <p class="card-title flex-grow-1">Advanced Table</p>
+            <button type="button" class="btn btn-info my-btn" >Display candidates</button>
+
+        
+
+            <button type="button" class="btn btn-primary my-btn" data-toggle="modal" data-target="#exampleModalCenter">
+              addUser
+            </button>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="table-responsive">
+                <table class="display expandable-table" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>last name</th>
+                      <th>first name</th>
+                      <th>email Address</th>
+                      <th>birthDate</th>
+                      <th>password</th>
+                      <th>niveau</th>
+                     
+                      <th>role</th>
+                      <th>Action </th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let user of listUser ">
+                   <tr>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.emailAddress}}</td>
+                    <td>{{user.birthDate}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.niveau}}</td>
+                    <td>{{user.role}}</td>
+                   
+                    <td>
+                      
+                    
+                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter1" (click)="getId(user.id)"style="margin-right: 10px;">
+                        Edit
+                      </button>
+                      <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">
+                        Delete
+                      </button>       
+
+  
+                    </td>
+                   </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div> 
+      </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <form novalidate>
+          <div class="row">
+              <div class="col-md-12 grid-margin">
+                  <div class="card rounded">
+                      <div class="card-header">
+                          <h4 class="card-title">ADD User</h4>
+                      </div>
+                      <div class="card-body">
+                       
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control form-control-sm w-75 mx-auto" name="lastName"
+                                [(ngModel)]="user.lastName" placeholder="lastName" required #titleInput>
+                        </div>
+                        <div class="form-group text-center">
+                          <input type="text" class="form-control form-control-sm w-75 mx-auto" name="firstName"
+                              [(ngModel)]="user.firstName" placeholder="firstName" required #titleInput>
+                      </div>
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control form-control-sm w-75 mx-auto" name="emailAddress"
+                                [(ngModel)]="user.emailAddress" placeholder="emailAddress" required #titleInput>
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="date" class="form-control form-control-sm w-75 mx-auto" name="birthDate"
+                                [(ngModel)]="user.birthDate" placeholder="birthDate" required #titleInput>
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="password" class="form-control form-control-sm w-75 mx-auto" name="password"
+                                [(ngModel)]="user.password" placeholder="password" required #titleInput>
+                        </div>
+                       
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control form-control-sm w-75 mx-auto" name="niveau"
+                                [(ngModel)]="user.niveau" placeholder="niveau">
+                        </div>
+
+                        <div class="form-group text-center">
+                          <input type="text" class="form-control form-control-sm w-75 mx-auto" name="role"
+                              [(ngModel)]="user.role" placeholder="role">
+                         </div>
+
+            
+      
+                          <div class="form-group text-center"> 
+                            <!-- aria-label="Close"  data-dismiss="modal" (click)="closeModal(); -->
+                              <!-- <button type="submit" class="btn btn-danger" aria-label="Close"  data-dismiss="modal" (click)="closeModal();  (click)="UpdateOffer()" >Update</button> -->
+                              <button type="submit" class="btn btn-danger" aria-label="Close"  data-dismiss="modal" (click)="closeModal();  createUser()">Submit</button>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <!-- Modal 2 -->
+ <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <form novalidate>
+          <div class="row">
+              <div class="col-md-12 grid-margin">
+                  <div class="card rounded">
+                      <div class="card-header">
+                          <h4 class="card-title">EDID User</h4>
+                      </div>
+                      <div class="card-body">
+                       
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control form-control-sm w-75 mx-auto" name="lastName"
+                                [(ngModel)]="user.lastName" placeholder="lastName" required #titleInput>
+                        </div>
+                        <div class="form-group text-center">
+                          <input type="text" class="form-control form-control-sm w-75 mx-auto" name="firstName"
+                              [(ngModel)]="user.firstName" placeholder="firstName" required #titleInput>
+                      </div>
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control form-control-sm w-75 mx-auto" name="emailAddress"
+                                [(ngModel)]="user.emailAddress" placeholder="emailAddress" required #titleInput>
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="date" class="form-control form-control-sm w-75 mx-auto" name="birthDate"
+                                [(ngModel)]="user.birthDate" placeholder="birthDate" required #titleInput>
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="password" class="form-control form-control-sm w-75 mx-auto" name="password"
+                                [(ngModel)]="user.password" placeholder="password" required #titleInput>
+                        </div>
+                       
+                        <div class="form-group text-center">
+                            <input type="text" class="form-control form-control-sm w-75 mx-auto" name="niveau"
+                                [(ngModel)]="user.niveau" placeholder="niveau">
+                        </div>
+
+                        <div class="form-group text-center">
+                          <input type="text" class="form-control form-control-sm w-75 mx-auto" name="role"
+                              [(ngModel)]="user.role" placeholder="role">
+                         </div>
+
+            
+      
+                          <div class="form-group text-center"> 
+                            <!-- aria-label="Close"  data-dismiss="modal" (click)="closeModal(); -->
+                              <!-- <button type="submit" class="btn btn-danger" aria-label="Close"  data-dismiss="modal" (click)="closeModal();  (click)="UpdateOffer()" >Update</button> -->
+                              <button type="submit" class="btn btn-danger" aria-label="Close"  data-dismiss="modal" (click)="closeModal();  UpdateUser()">Submit</button>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
