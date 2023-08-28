@@ -12,10 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
 import { FooterComponent } from './footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ListUserComponent } from './components/User/list-user/list-user.component';
 import { ListThematiqueComponent } from './components/Competance/Thematique/list-thematique/list-thematique.component';
 import { AuthComponent } from './components/Auth/auth/auth.component';
+import { QuestionsComponent } from './components/questions/questions.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -31,12 +34,15 @@ import { AuthComponent } from './components/Auth/auth/auth.component';
     ListUserComponent,
     ListThematiqueComponent,
     AuthComponent,
+    QuestionsComponent,
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     FormsModule
   ],
   providers: [],

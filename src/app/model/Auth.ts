@@ -5,6 +5,9 @@ export class AuthenticationRequest {
   
   export class AuthenticationResponse {
     token!: string;
+    role!: string ;
+    user: any;
+   
   }
   
   export class RegisterRequest {

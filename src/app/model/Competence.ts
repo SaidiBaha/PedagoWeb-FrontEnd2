@@ -1,7 +1,9 @@
+import { SousCompetence } from "./SousCompetence";
+
 export class Competence {
-    [x: string]: any
+   
     id !: number
     nom!: string
-    
+    Souscompetences?: SousCompetence[];
     
     }

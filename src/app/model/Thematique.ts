@@ -4,7 +4,7 @@ export class Thematique {
 id !: number
 nom!: string
 competences?: Competence[];
-isExpanded!: boolean;
+//isExpanded!: boolean;
 
  
 

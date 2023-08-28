@@ -1,0 +1,17 @@
+<div *ngIf="questionsWithOptions && questionsWithOptions.length > 0">
+  <h2>Question {{ currentQuestionIndex + 1 }}:</h2>
+  <p>{{ questionsWithOptions[currentQuestionIndex].question.enonce }}</p>
+  <ul>
+    <li *ngFor="let option of questionsWithOptions[currentQuestionIndex].options">
+      <label>
+        <input type="radio" name="userAnswer" [(ngModel)]="userAnswer" [value]="option.option">
+        {{ option.option }}
+      </label>
+    </li>
+  </ul>
+  <button (click)="answerQuestion()" [disabled]="isAnswering">Valider</button>
+ <!-- <button (click)="navigateToQuestion(-1)" [disabled]="currentQuestionIndex === 0">Précédent</button>
+  <button (click)="navigateToQuestion(1)" [disabled]="currentQuestionIndex === questionsWithOptions.length - 1 || !canProceed">Suivant</button>
+-->
+ 
+</div>

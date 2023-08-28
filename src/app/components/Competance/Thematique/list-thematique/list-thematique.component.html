@@ -1,3 +1,4 @@
+<!--
 <table class="display expandable-table" style="width:100%">
   <thead>
     <tr>
@@ -34,14 +35,81 @@
             </div>
           </div>
         </div>
-
-        <button type="button" class="btn btn-danger" (click)="deleteUser(th.id)">
-          Delete
-        </button>
+      </td>
+      <button type="button" class="btn btn-danger" (click)="deleteUser(th.id)">
+        Delete
+      </button>
+    </tr>
+  </tbody>
+</table> -->
+<table class="display expandable-table" style="width:100%">
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>Action </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let th of listThematique">
+      <td>
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header" id="heading{{th.id}}">
+              <h5 class="mb-0">
+                <button
+                  class="btn btn-link"
+                  data-toggle="collapse"
+                  [attr.data-target]="'#collapse' + th.id"
+                  aria-expanded="false"
+                  [attr.aria-controls]="'collapse' + th.id"
+                  (click)="showCompetences(th)"
+                >
+                  {{ th.nom }}
+                </button>
+              </h5>
+            </div>
+            <div
+              [id]="'collapse' + th.id"
+              class="collapse"
+              [class.show]="selectedThematique === th"
+              [attr.aria-labelledby]="'heading' + th.id"
+              data-parent="#accordion"
+            >
+              <div class="card-body">
+                <div *ngIf="selectedThematique === th">
+                  <ul>
+                    <li *ngFor="let competence of competencesForSelectedThematique">
+                      <button class="btn btn-link" (click)="showSousCompetences(competence)">
+                        {{ competence.nom }}
+                      </button>
+                      <ul *ngIf="selectedCompetence === competence">
+                        <li *ngFor="let sousCompetence of SouscompetencesForSelectedCompetence">
+                         
+                         <button class="btn btn-link" 
+                         [routerLink]="['/sc']"
+                         [queryParams]="{ sousCompetenceId: sousCompetence.id }">
+                          {{ sousCompetence.nom }}
+                         </button>
+                          
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+      <!--  <button type="button" class="btn btn-danger" (click)="deleteUser(th.id)">Delete</button> -->
       </td>
     </tr>
   </tbody>
 </table>
+
+
+
 
 <!-- Show the list of competences for the selected thematique -->
 

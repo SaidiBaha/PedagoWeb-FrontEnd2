@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/model/User';
+import { Role, User } from 'src/app/model/User';
 import { UserService } from 'src/app/services/UserService';
 
 @Component({
@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/UserService';
   styleUrls: ['./list-user.component.css']
 })
 export class ListUserComponent implements OnInit {
+ roles = Role;
  listUser!:User[]
  idUser! : number; 
  showModal = false;
@@ -29,7 +30,7 @@ export class ListUserComponent implements OnInit {
     )
   }
 
-  UpdateUser(){
+ /* UpdateUser(){
     this.userservice.updateUser(this.idUser , this.user ).subscribe((response)=>{
       this.userservice.getAllUsers().subscribe(
         res=>{
@@ -42,7 +43,26 @@ export class ListUserComponent implements OnInit {
     })
     this.route.navigate(['/listUser'])
   
+  }*/
+
+  UpdateUser() {
+    this.userservice.updateUser(this.idUser, this.user).subscribe((response) => {
+      this.userservice.getAllUsers().subscribe(
+        (res) => {
+          console.log("res", res);
+          this.listUser = res;
+        }
+      );
+    });
+    this.route.navigate(['/listUser']);
   }
+
+
+
+
+
+
+
 
   closeModal() {
     this.showModal = false;

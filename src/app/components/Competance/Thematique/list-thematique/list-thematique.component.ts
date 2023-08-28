@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Competence } from 'src/app/model/Competence';
+import { SousCompetence } from 'src/app/model/SousCompetence';
 import { Thematique } from 'src/app/model/Thematique';
 import { CompetenceService } from 'src/app/services/CompetenceService';
+import { SousCompetenceService } from 'src/app/services/SousCompetenceService';
 import { ThematiqueService } from 'src/app/services/ThematiqueService';
 
 @Component({
@@ -16,21 +18,25 @@ export class ListThematiqueComponent implements OnInit {
   listCompetences!:Competence[]
   thematique: Thematique = new Thematique();
   showModal = false;
- // @Input() idUser! : number  ;
+
     idUser: number= 1;
   idthematique!: number;
+  sousCompetenceId!:number ;
 
 
 ////
 
 selectedThematique: Thematique | null = null;
+selectedCompetence: Competence | null = null;
+
+SouscompetencesForSelectedCompetence: SousCompetence[] = [];
 competencesForSelectedThematique: Competence[] = [];
 
 
 ///
 
 
-  constructor(private thematiqueservice:ThematiqueService,private competenceservice:CompetenceService,private  route:Router){}
+  constructor(private thematiqueservice:ThematiqueService,private competenceservice:CompetenceService,private Souscompetenceservice:SousCompetenceService,private  route:Router){}
 
   ngOnInit(): void {
     this.thematiqueservice.getAllThematique().subscribe(
@@ -84,12 +90,12 @@ competencesForSelectedThematique: Competence[] = [];
       })
     }
 
- //   getId(id : number){
- //     this.idthematique = id;
- //     this.thematiqueservice.getThematiqueById(id).subscribe((data)=>{
- //       this.thematique = data      
- //     })
- //   }
+ /*   getId(id : number){
+      this.idthematique = id;
+      this.thematiqueservice.getThematiqueById(id).subscribe((data)=>{
+       this.thematique = data      
+      })
+    }*/
 
  getId(id: number) {
   this.idthematique = id;
@@ -98,6 +104,8 @@ competencesForSelectedThematique: Competence[] = [];
     // Fetch the competences for the selected thematique
     this.competenceservice.getCompetencesByThematiqueId(id).subscribe((competences) => {
       this.competencesForSelectedThematique = competences;
+
+
     });
   });
 }
@@ -115,10 +123,27 @@ showCompetences(thematique: Thematique) {
   );
 }
 
+showSousCompetences(competence: Competence) {
+  this.selectedCompetence = competence;
+  this.Souscompetenceservice.getSousCompetencesByCompetenceId(competence.id).subscribe(
+    Souscompetences => {
+      this.SouscompetencesForSelectedCompetence = Souscompetences;
+    },
+    error => {
+      console.error('Error fetching Souscompetences:', error);
+    }
+  );
+}
 
 
 
 
+/*redirectQuestion(id : number){
+  this.sousCompetenceId = id
+  this.route.navigate(['/sc'])
+  
+  }*/
+ 
   
 
 }
