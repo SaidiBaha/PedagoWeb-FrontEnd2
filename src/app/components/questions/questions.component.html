@@ -15,3 +15,25 @@
 -->
  
 </div>
+<div>
+  <!-- Affiche le score de l'utilisateur -->
+  <p>Score: {{ userScore }}</p>
+  <!-- Affiche le nombre total de questions -->
+  <p>Nombre de questions: {{ totalQuestions }}</p>
+</div>
+
+
+<div *ngIf="!showResults">
+  <!-- Affiche les éléments de question et réponse ici -->
+</div>
+
+<div *ngIf="showResults">
+  <!-- Affiche le score de l'utilisateur -->
+  <p>Score: {{ userScore }}</p>
+  <!-- Affiche le nombre total de questions -->
+  <p>Nombre de questions: {{ totalQuestions }}</p>
+  <!-- Affiche le nombre de questions correctes -->
+  <p>Nombre de questions correctes: {{ correctAnswersCount }}</p>
+  <!-- Affiche le nombre de questions incorrectes -->
+  <p>Nombre de questions incorrectes: {{ incorrectAnswersCount }}</p>
+</div>

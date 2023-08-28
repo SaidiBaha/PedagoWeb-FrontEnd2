@@ -13,7 +13,8 @@ export class QuestionService {
   private baseUrl = 'http://localhost:8088/springMVC/sous-competences';
   private baseUrl2 ='http://localhost:8088/springMVC/api/v1/user';
   private baseUrl3 ='http://localhost:8088/springMVC/questions';
-  private baseUrl4 ='http://localhost:8088/springMVC/options' 
+  private baseUrl4 ='http://localhost:8088/springMVC/options' ;
+
 
   constructor(private http: HttpClient) { }
 
@@ -47,4 +48,6 @@ export class QuestionService {
     const url = `${this.baseUrl4}/option/${questionId}`;
     return this.http.get(url);
   }
+
+
 }

@@ -13,6 +13,13 @@ import { QuestionService } from 'src/app/services/QuestionService';
 export class QuestionsComponent implements OnInit  {
 
 
+  correctAnswersCount: number = 0;
+  incorrectAnswersCount: number = 0;
+  showResults: boolean = false;
+  //--
+
+  totalQuestions: number = 0;
+  userScore: number = 0;
 
   isAnswering: boolean = false; // Pour désactiver le bouton "Valider" pendant le traitement
   canProceed: boolean = false; // Pour activer le bouton "Suivant" après 5 secondes
@@ -41,6 +48,7 @@ export class QuestionsComponent implements OnInit  {
     this.route.queryParams.subscribe(params => {
       this.sousCompetenceId = params['sousCompetenceId'];
       this.loadQuestions();
+      this.loadUserScore();
     });
   }
 
@@ -54,6 +62,7 @@ export class QuestionsComponent implements OnInit  {
         question,
         options: []
       }));
+      this.totalQuestions = this.questionsWithOptions.length; // Définit le nombre total de questions
       this.loadOptionsForCurrentQuestion();
     });
   }
@@ -115,12 +124,22 @@ export class QuestionsComponent implements OnInit  {
             if (isAnswerCorrect) {
              
               this.toastr.success('Réponse correcte', 'Succès');
+              this.correctAnswersCount++;
             } else {
               this.toastr.error('Réponse incorrecte', 'Échec');
+              this.incorrectAnswersCount++; // Incrémente le compteur de réponses incorrectes
             }
             
           // Appel à la fonction pour passer à la question suivante après 5 secondes
         this.nextQuestionWithDelay();
+        this.loadUserScore();
+
+
+          if (this.currentQuestionIndex === this.totalQuestions - 1) {
+            this.showResults = true; // Affiche les résultats lorsque c'est la dernière question
+          } else {
+            this.nextQuestionWithDelay();
+          }
           },
           error => console.error(error)
         );
@@ -133,6 +152,14 @@ export class QuestionsComponent implements OnInit  {
         this.navigateToQuestion(1); // Appelle la fonction pour passer à la question suivante
         this.canProceed = true; // Active le bouton "Suivant" après 5 secondes
       }, 5000); // Attend 5 secondes avant de passer à la question suivante
+    }
+
+    loadUserScore(): void {
+      const userId = 1; // Remplacez par l'ID de l'utilisateur connecté
+      this.questionService.getUserScore(userId)
+        .subscribe(score => {
+          this.userScore = score;
+        });
     }
 
  /*nextQuestion(): void {
