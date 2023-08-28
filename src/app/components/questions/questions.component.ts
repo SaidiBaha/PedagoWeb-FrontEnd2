@@ -66,6 +66,8 @@ export class QuestionsComponent implements OnInit  {
       this.loadOptionsForCurrentQuestion();
     });
   }
+
+
   loadOptionsForCurrentQuestion(): void {
     const questionId = this.questionsWithOptions[this.currentQuestionIndex].question.id;
     this.questionService.getOptionsByQuestion(questionId)
@@ -73,6 +75,8 @@ export class QuestionsComponent implements OnInit  {
         this.questionsWithOptions[this.currentQuestionIndex].options = options;
       });
   }
+
+
   navigateToQuestion(offset: number): void {
     const newIndex = this.currentQuestionIndex + offset;
     if (newIndex >= 0 && newIndex < this.questionsWithOptions.length) {
@@ -131,15 +135,15 @@ export class QuestionsComponent implements OnInit  {
             }
             
           // Appel à la fonction pour passer à la question suivante après 5 secondes
-        this.nextQuestionWithDelay();
+         if (this.currentQuestionIndex < this.totalQuestions - 1) {
+          this.nextQuestionWithDelay();
+        } else {
+          // Affiche les résultats lorsque c'est la dernière question
+          this.showResults = true;
+        }
+        
+        // Recharge le score après avoir répondu
         this.loadUserScore();
-
-
-          if (this.currentQuestionIndex === this.totalQuestions - 1) {
-            this.showResults = true; // Affiche les résultats lorsque c'est la dernière question
-          } else {
-            this.nextQuestionWithDelay();
-          }
           },
           error => console.error(error)
         );

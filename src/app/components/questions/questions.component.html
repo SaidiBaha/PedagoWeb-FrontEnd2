@@ -23,17 +23,37 @@
 </div>
 
 
-<div *ngIf="!showResults">
-  <!-- Affiche les éléments de question et réponse ici -->
-</div>
+
+
 
 <div *ngIf="showResults">
-  <!-- Affiche le score de l'utilisateur -->
-  <p>Score: {{ userScore }}</p>
-  <!-- Affiche le nombre total de questions -->
-  <p>Nombre de questions: {{ totalQuestions }}</p>
-  <!-- Affiche le nombre de questions correctes -->
-  <p>Nombre de questions correctes: {{ correctAnswersCount }}</p>
-  <!-- Affiche le nombre de questions incorrectes -->
-  <p>Nombre de questions incorrectes: {{ incorrectAnswersCount }}</p>
+  <!-- Affiche le score de l'utilisateur, le nombre de questions correctes, etc. -->
+  <!-- Bouton pour ouvrir la fenêtre modale -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resultsModal">
+    Afficher les résultats
+  </button>
+</div>
+
+<!-- Fenêtre modale des résultats -->
+<div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="resultsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultsModalLabel">Résultats</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Affiche le score de l'utilisateur, le nombre de questions correctes, etc. -->
+        <p>Score: {{ userScore }}</p>
+        <p>Nombre de questions: {{ totalQuestions }}</p>
+        <p>Nombre de questions correctes: {{ correctAnswersCount }}</p>
+        <p>Nombre de questions incorrectes: {{ incorrectAnswersCount }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
 </div>
