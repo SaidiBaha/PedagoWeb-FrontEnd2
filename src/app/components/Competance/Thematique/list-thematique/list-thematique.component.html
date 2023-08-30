@@ -45,8 +45,8 @@
 <table class="display expandable-table" style="width:100%">
   <thead>
     <tr>
-      <th>name</th>
-      <th>Action </th>
+      <th>Thematique</th>
+    
     </tr>
   </thead>
   <tbody>
@@ -57,15 +57,17 @@
             <div class="card-header" id="heading{{th.id}}">
               <h5 class="mb-0">
                 <button
-                  class="btn btn-link"
-                  data-toggle="collapse"
-                  [attr.data-target]="'#collapse' + th.id"
-                  aria-expanded="false"
-                  [attr.aria-controls]="'collapse' + th.id"
-                  (click)="showCompetences(th)"
-                >
-                  {{ th.nom }}
-                </button>
+                class="btn btn-custom"
+                data-toggle="collapse"
+                [attr.data-target]="'#collapse' + th.id"
+                aria-expanded="false"
+                [attr.aria-controls]="'collapse' + th.id"
+                (click)="showCompetences(th)">
+              
+                {{ th.nom }}
+                <span class="arrow-icon"></span>
+              </button>
+                
               </h5>
             </div>
             <div
@@ -90,7 +92,13 @@
                          [queryParams]="{ sousCompetenceId: sousCompetence.id }">
                           {{ sousCompetence.nom }}
                          </button>
-                          
+                        
+                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModalCenter3" (click)="showCours(sousCompetence.id)">
+                          showCours
+                        </button>
+                       
+
+
                         </li>
                       </ul>
                     </li>
@@ -107,6 +115,10 @@
     </tr>
   </tbody>
 </table>
+
+
+
+  
 
 
 
@@ -153,6 +165,33 @@
 
 
 
+<!-- Modal3 -->
+<div class="modal fade"  id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="width: 1000px;">
+
+      <div class="modal-body">
+        <table class="display expandable-table" style="width: auto">
+          <thead>
+            <tr>
+              <th>Cours</th>
+              
+            </tr>
+          </thead>
+          <tbody >
+           <tr>
+            <div *ngIf="scrapedContent">
+              <h3>Contenu extrait</h3>
+              <p>{{ scrapedContent }}</p>
+            </div>
+           </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

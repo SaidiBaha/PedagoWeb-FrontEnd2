@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Question, Option } from 'src/app/model/Question';
-import { QuestionDTO } from 'src/app/model/QuestionDTO ';
+
 import { QuestionService } from 'src/app/services/QuestionService';
 
 @Component({
@@ -29,12 +28,9 @@ export class QuestionsComponent implements OnInit  {
   questionsWithOptions: any[] = [];
   
   
- // @Input() sousCompetenceId! : number  ;
+
   sousCompetenceId: number=0;
- // questions: QuestionDTO[] = [];
- // currentQuestionIndex = 0;
-  currentQuestion!: QuestionDTO;
-  //currentQuestion2!:Question;
+
   userAnswer = '';
 
   constructor(
@@ -87,26 +83,6 @@ export class QuestionsComponent implements OnInit  {
   }
 
 
-
-
-//////////////////////////////////////////////////////////////////////////----
- /* previousQuestion(): void {
-    if (this.currentQuestionIndex > 0) {
-      this.currentQuestionIndex--;     
-      this.currentQuestion = this.questions[this.currentQuestionIndex];
-    }
-  }
-
-  nextQuestion(): void {
-    if (this.currentQuestionIndex < this.questions.length - 1) {
-      this.currentQuestionIndex++;
-      this.currentQuestion = this.questions[this.currentQuestionIndex];
-    }
-  }*/
-
-
-
-
     answerQuestion(): void {
       this.isAnswering = true; // Désactive le bouton "Valider" pendant le traitement
       const userId = 1; // Remplacez par l'ID de l'utilisateur connecté
@@ -155,7 +131,7 @@ export class QuestionsComponent implements OnInit  {
         this.isAnswering = false; // Réactive le bouton "Valider"
         this.navigateToQuestion(1); // Appelle la fonction pour passer à la question suivante
         this.canProceed = true; // Active le bouton "Suivant" après 5 secondes
-      }, 5000); // Attend 5 secondes avant de passer à la question suivante
+      }, 4000); // Attend 5 secondes avant de passer à la question suivante
     }
 
     loadUserScore(): void {
@@ -165,88 +141,6 @@ export class QuestionsComponent implements OnInit  {
           this.userScore = score;
         });
     }
-
- /*nextQuestion(): void {
-    if (this.currentQuestionIndex < this.questions.length - 1) {
-      this.currentQuestionIndex++;
-      this.currentQuestion = this.questions[this.currentQuestionIndex];
-      this.userAnswer = ''; // Réinitialiser la réponse de l'utilisateur
-    }
-  }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //----------------------------------------------------2 éme méthode ---------------//
-
-  /*
-  ngOnInit() {
-    this.loadQuestions();
-  }
-
-  loadQuestions() {
-    this.questionService.getQuestions().subscribe(
-      questions => {
-        this.questions = questions;
-      },
-      error => {
-        console.error('Error loading questions:', error);
-      }
-    );
-  }
-
-  onNextQuestion() {
-    this.currentQuestionIndex = (this.currentQuestionIndex + 1) % this.questions.length;
-  }
-
-  onPreviousQuestion() {
-    this.currentQuestionIndex = (this.currentQuestionIndex - 1 + this.questions.length) % this.questions.length;
-  }*/
-
-
-
-
-  //----------------------------------------------------1 ére méthode ---------------//
- /* ngOnInit(): void {
-    this.loadQuestion(1);
-  }
-
-
-  loadQuestion(questionId: number): void {
-    this.questionService.getQuestionById(questionId).subscribe(question => {
-      this.currentQuestion = question;
-      this.selectedOption = { id: 0, option: '', correctAnswer: false };
-      this.answerMessage = '';
-      console.log('Authentication successful:', response);
-
-    });
-  }
-
-  answerQuestion(): void {
-    this.questionService.answerQuestion(this.userId, this.currentQuestion.id, this.selectedOption.option)
-      .subscribe(message => {
-        this.answerMessage = message;
-        this.loadUserScore();
-      });
-  }
-
-  loadUserScore(): void {
-    // Chargez le score de l'utilisateur depuis le service UserService
-  }
-
-*/
-
 
   
 }

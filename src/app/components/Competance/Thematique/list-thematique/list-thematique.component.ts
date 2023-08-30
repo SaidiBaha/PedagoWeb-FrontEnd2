@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Competence } from 'src/app/model/Competence';
+import { ParagrapheScraped } from 'src/app/model/ParagrapheScraped';
 import { SousCompetence } from 'src/app/model/SousCompetence';
 import { Thematique } from 'src/app/model/Thematique';
 import { CompetenceService } from 'src/app/services/CompetenceService';
+import { QuestionService } from 'src/app/services/QuestionService';
 import { SousCompetenceService } from 'src/app/services/SousCompetenceService';
 import { ThematiqueService } from 'src/app/services/ThematiqueService';
 
@@ -14,6 +16,7 @@ import { ThematiqueService } from 'src/app/services/ThematiqueService';
 })
 export class ListThematiqueComponent implements OnInit {
 
+  listCours!:ParagrapheScraped;
   listThematique!:Thematique[]
   listCompetences!:Competence[]
   thematique: Thematique = new Thematique();
@@ -36,7 +39,7 @@ competencesForSelectedThematique: Competence[] = [];
 ///
 
 
-  constructor(private thematiqueservice:ThematiqueService,private competenceservice:CompetenceService,private Souscompetenceservice:SousCompetenceService,private  route:Router){}
+  constructor(private questionservice:QuestionService,private thematiqueservice:ThematiqueService,private competenceservice:CompetenceService,private Souscompetenceservice:SousCompetenceService,private  route:Router){}
 
   ngOnInit(): void {
     this.thematiqueservice.getAllThematique().subscribe(
@@ -89,13 +92,7 @@ competencesForSelectedThematique: Competence[] = [];
         
       })
     }
-
- /*   getId(id : number){
-      this.idthematique = id;
-      this.thematiqueservice.getThematiqueById(id).subscribe((data)=>{
-       this.thematique = data      
-      })
-    }*/
+   
 
  getId(id: number) {
   this.idthematique = id;
@@ -105,10 +102,13 @@ competencesForSelectedThematique: Competence[] = [];
     this.competenceservice.getCompetencesByThematiqueId(id).subscribe((competences) => {
       this.competencesForSelectedThematique = competences;
 
+      
 
-    });
-  });
+    })
+  })
 }
+
+
 
 
 showCompetences(thematique: Thematique) {
@@ -136,14 +136,17 @@ showSousCompetences(competence: Competence) {
 }
 
 
+scrapedContent: string = '';
+showCours(sousCompetenceId: number) {
+  this.questionservice.scrapeAndSave(sousCompetenceId).subscribe(
+    (response: any) => {
+      this.scrapedContent = response.scrapedData; // Extraire la propriété contenu
+    },
+    (error) => {
+      console.error('Erreur lors de l\'extraction et de l\'enregistrement des données :', error);
+    }
+  );
+}
 
-
-/*redirectQuestion(id : number){
-  this.sousCompetenceId = id
-  this.route.navigate(['/sc'])
-  
-  }*/
- 
-  
 
 }

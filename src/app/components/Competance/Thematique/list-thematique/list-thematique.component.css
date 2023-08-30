@@ -1,0 +1,28 @@
+.btn-custom {
+    background-color: transparent;
+    border: none;
+    position: relative;
+    padding: 0;
+    transition: color 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn-custom .arrow-icon {
+    margin-left: 10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #333 transparent transparent transparent;
+    transition: transform 0.3s;
+  }
+  
+  .btn-custom:hover {
+    color: #007bff;
+    transform: translateY(-3px);
+  }
+  
+  .btn-custom:hover .arrow-icon {
+    transform: rotate(180deg);
+  }

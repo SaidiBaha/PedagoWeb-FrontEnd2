@@ -1,38 +1,16 @@
-<div *ngIf="questionsWithOptions && questionsWithOptions.length > 0">
-  <h2>Question {{ currentQuestionIndex + 1 }}:</h2>
-  <p>{{ questionsWithOptions[currentQuestionIndex].question.enonce }}</p>
-  <ul>
-    <li *ngFor="let option of questionsWithOptions[currentQuestionIndex].options">
-      <label>
-        <input type="radio" name="userAnswer" [(ngModel)]="userAnswer" [value]="option.option">
-        {{ option.option }}
-      </label>
-    </li>
-  </ul>
-  <button (click)="answerQuestion()" [disabled]="isAnswering">Valider</button>
- <!-- <button (click)="navigateToQuestion(-1)" [disabled]="currentQuestionIndex === 0">Précédent</button>
-  <button (click)="navigateToQuestion(1)" [disabled]="currentQuestionIndex === questionsWithOptions.length - 1 || !canProceed">Suivant</button>
--->
- 
-</div>
+ <!--
 <div>
-  <!-- Affiche le score de l'utilisateur -->
+ 
   <p>Score: {{ userScore }}</p>
-  <!-- Affiche le nombre total de questions -->
+
   <p>Nombre de questions: {{ totalQuestions }}</p>
 </div>
+ Affiche le score de l'utilisateur -->
 
 
 
 
 
-<div *ngIf="showResults">
-  <!-- Affiche le score de l'utilisateur, le nombre de questions correctes, etc. -->
-  <!-- Bouton pour ouvrir la fenêtre modale -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resultsModal">
-    Afficher les résultats
-  </button>
-</div>
 
 <!-- Fenêtre modale des résultats -->
 <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="resultsModalLabel" aria-hidden="true">
@@ -57,3 +35,58 @@
     </div>
   </div>
 </div>
+
+
+<div class="quiz-container" id="quiz" *ngIf="questionsWithOptions && questionsWithOptions.length > 0 && !showResults">
+  
+  <div class="quiz-header">
+    <p> {{ userScore }}/{{ totalQuestions }} Questions</p>
+    <h2 id="question">Question {{ currentQuestionIndex + 1 }}:
+      
+    </h2>
+    <h4>{{ questionsWithOptions[currentQuestionIndex].question.enonce }}</h4>
+    <ul>
+      <li *ngFor="let option of questionsWithOptions[currentQuestionIndex].options; let i = index">
+        <input type="radio" name="answer" [id]="option.id" class="answer" [(ngModel)]="userAnswer" [value]="option.option">
+        <label [for]="option.id" [id]="option.id + '_text'">{{ option.option }}</label>
+      </li>
+    </ul>
+  </div>
+  <button id="submit" (click)="answerQuestion()" [disabled]="isAnswering">Valider</button>
+</div>
+
+<div class="quiz-results" *ngIf="showResults">
+  <ul>
+    <li>
+      <div>
+        <!-- Bouton pour ouvrir la fenêtre modale -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resultsModal">
+          Afficher les résultats
+        </button>
+      </div>
+    </li>
+   
+  </ul>
+  
+ <ul>
+  <li>
+    <div>
+      <button class="btn btn-secondary" routerLink="/listTh">Retour</button>
+     
+    </div>
+  </li>
+
+ </ul>
+
+
+</div>
+
+<!-- Fenêtre modale des résultats -->
+<div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="resultsModalLabel" aria-hidden="true">
+  <!-- ... contenu de la fenêtre modale ... -->
+  <div>
+   
+  </div>
+</div>
+
+

@@ -1,8 +1,8 @@
 // question.service.ts
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
 
 import { QuestionDTO } from '../model/QuestionDTO ';
 
@@ -47,6 +47,21 @@ export class QuestionService {
   getOptionsByQuestion(questionId: number): Observable<any> {
     const url = `${this.baseUrl4}/option/${questionId}`;
     return this.http.get(url);
+  }
+/////////////////////////-    web scraping       ------////////////////////////////
+
+
+  scrapeAndSave(sousCompetenceId: number): Observable<string> {
+    const url = `${this.baseUrl}/scrape-and-save/${sousCompetenceId}`;
+    return this.http.get<string>(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('An error occurred:', error);
+    return throwError('Something went wrong; please try again later.');
   }
 
 

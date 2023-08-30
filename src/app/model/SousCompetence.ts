@@ -1,3 +1,4 @@
+import { ParagrapheScraped } from "./ParagrapheScraped";
 import { Question } from "./Question";
 
 export class SousCompetence {
@@ -6,5 +7,7 @@ export class SousCompetence {
     nom!: string
 
     Question?: Question[];
+ 
+    ParagrapheScraped?:ParagrapheScraped[];
     
     }
